@@ -1,0 +1,7 @@
+{
+  "name": "PROBE",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

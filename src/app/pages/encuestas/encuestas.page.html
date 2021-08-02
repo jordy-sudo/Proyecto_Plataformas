@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title size="large" class="ion-text-center">
+      <b>PROBE</b>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-slides scrollbar="true" pager="false" [options]="slideOpts">
+    <ion-slide style="display: block;" *ngFor="let pregunta of quentions">
+      <div>
+        <ion-text>
+          {{pregunta.question}}
+        </ion-text>
+      </div>
+      <div>
+        <ion-button (click)="cambiarVista(1)" [fill]="btn1.fill" [color]="btn1.color" expand="block">{{pregunta.answ1}}
+        </ion-button>
+        <ion-button (click)="cambiarVista(2)" [fill]="btn2.fill" [color]="btn2.color" expand="block">{{pregunta.answ2}}
+        </ion-button>
+        <ion-button (click)="cambiarVista(3)" [fill]="btn3.fill" [color]="btn3.color" expand="block">{{pregunta.answ3}}
+        </ion-button>
+        <ion-button (click)="cambiarVista(4)" [fill]="btn4.fill" [color]="btn4.color" expand="block">{{pregunta.answ4}}
+        </ion-button>
+      </div>
+    </ion-slide>
+
+  </ion-slides>
+
+</ion-content>

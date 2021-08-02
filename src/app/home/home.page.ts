@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -13,8 +13,11 @@ export class HomePage {
   tipoIconoPass: string = "eye-outline";
   tipotextPass: string = "password";
 
+
+
   constructor(
-    public alertController: AlertController
+    public alertController: AlertController,
+    private navCtrl: NavController
   ) { }
 
 
@@ -31,12 +34,26 @@ export class HomePage {
   }
 
   validar() {
-    console.log(this.userCed.length)
     if (this.userCed.length == 10) {
       if (this.userPass.length >= 10) {
+        // buscamos en la base de datos el rol y validamos usuario y contraseña
+        let role = 3;
+        if (this.userCed == '1718123563' && this.userPass == this.userCed && role == 3) {
+          switch (role) {
+            /*
+            case 1:
+              this.navCtrl.navigateForward('/home/administrador')
+              break;
+            case 2:
+              this.navCtrl.navigateForward('/home/supervisor')
+              break;
+              */
+            case 3:
+              this.navCtrl.navigateForward('/home/encuestador')
+              break;
+          }
+        }
 
-
-        console.log(this.userPass)
       } else {
         this.mensajesAlert("Campo contraseña", "Ingrese de manera correcta su contraseña");
       }

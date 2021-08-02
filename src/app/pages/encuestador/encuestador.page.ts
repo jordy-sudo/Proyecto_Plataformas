@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController,NavController } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-encuestador',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EncuestadorPage implements OnInit {
 
-  constructor() { }
+
+  constructor(
+    private navCtrl: NavController,
+    private menu: MenuController
+  ) { }
+
+
 
   ngOnInit() {
   }
+
+  agregar(){
+    this.navCtrl.navigateForward('/home/encuestador/encuestas')
+
+  }
+
+
 
 }

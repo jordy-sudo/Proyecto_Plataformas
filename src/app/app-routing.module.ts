@@ -10,7 +10,19 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },  {
+    path: 'administrador',
+    loadChildren: () => import('./pages/administrador/administrador.module').then( m => m.AdministradorPageModule)
   },
+  {
+    path: 'supervisor',
+    loadChildren: () => import('./pages/supervisor/supervisor.module').then( m => m.SupervisorPageModule)
+  },
+  {
+    path: 'encuestador',
+    loadChildren: () => import('./pages/encuestador/encuestador.module').then( m => m.EncuestadorPageModule)
+  },
+
 ];
 
 @NgModule({

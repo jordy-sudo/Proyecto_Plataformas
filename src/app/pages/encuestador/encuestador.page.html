@@ -1,14 +1,62 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title size="large" class="ion-text-center">
-      <b>PROBE</b>
-    </ion-title>
+  <ion-toolbar color="success">
+    <ion-title class="ion-text-center"> Encuestador</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div id="container">
 
-  <button (click)="agregar()">agregar encuesta</button>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Encuestador</ion-card-subtitle>
+        <ion-card-title>{{nombreEncuestador}}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Supervisor</ion-card-subtitle>
+        <ion-card-title>{{nombreSupervisor}}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+
+    <ion-list>
+
+      <ion-list-header>
+        <ion-label class="ion-text-center">
+          <h1>Jornada laboral del {{hoy}}</h1>
+        </ion-label>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label color="primary">Encuestas realizadas</ion-label>
+        <div>
+          <ion-label>
+            {{numEncuestasRealizadas}}
+          </ion-label>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary">Encuestas faltante </ion-label>
+        <div slot="end">
+          <ion-label>
+            {{numEncuestasfaltantes}}
+          </ion-label>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <ion-fab horizontal="center">
+      <ion-fab-button (click)="agregar()">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+  </div>
+
+
 
 </ion-content>
-

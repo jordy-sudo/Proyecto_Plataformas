@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular'
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 interface Question {
   question: string;
@@ -22,6 +23,12 @@ interface buttonStyle {
 
 export class EncuestasPage implements OnInit {
   @ViewChild(IonSlides, { static: true }) slides: IonSlides;
+
+  lngCel: number;
+  latCel: number;
+  audio: any;
+  keys: string[] = [];
+
 
 
   slideOpts = {
@@ -50,7 +57,10 @@ export class EncuestasPage implements OnInit {
     fill: "outline",
     color: "primary"
   }
-  constructor() {
+  constructor(
+    private geolocation: Geolocation,
+
+  ) {
     var question1: Question = {
       question: "¿Cómo esta la situacion del País?",
       answ1: "Muy bien",
@@ -89,6 +99,12 @@ export class EncuestasPage implements OnInit {
   }
 
   ngOnInit() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.lngCel = Number(resp.coords.longitude);
+      this.latCel = Number(resp.coords.latitude);
+
+      console.log("lng: " + this.lngCel)
+    })
     this.slides.lockSwipeToNext(true);
   }
 

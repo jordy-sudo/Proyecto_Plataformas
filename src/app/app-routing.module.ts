@@ -26,7 +26,7 @@ const routes: Routes = [
             loadChildren: () => import('./pages/encuestador/encuestador.module').then(m => m.EncuestadorPageModule)
           },
           {
-            path: 'encuestas',
+            path: 'encuestas/:cedulas',
             loadChildren: () => import('./pages/encuestas/encuestas.module').then(m => m.EncuestasPageModule)
           }
         ]

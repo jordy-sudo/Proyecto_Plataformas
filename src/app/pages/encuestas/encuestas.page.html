@@ -7,26 +7,32 @@
 </ion-header>
 
 <ion-content>
+  <ion-slides scrollbar="true" pager="true" scrollbar="false" [options]="slideOpts">
+    <ion-slide *ngFor="let pregunta of preguntas | async; let i = index" style="display: block;">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            {{pregunta.pregunta}}
+          </ion-card-title>
+        </ion-card-header>
 
-  <ion-slides scrollbar="true" pager="false" [options]="slideOpts">
-    <ion-slide style="display: block;" *ngFor="let pregunta of quentions">
-      <div>
-        <ion-text>
-          {{pregunta.question}}
-        </ion-text>
-      </div>
-      <div>
-        <ion-button (click)="cambiarVista(1)" [fill]="btn1.fill" [color]="btn1.color" expand="block">{{pregunta.answ1}}
-        </ion-button>
-        <ion-button (click)="cambiarVista(2)" [fill]="btn2.fill" [color]="btn2.color" expand="block">{{pregunta.answ2}}
-        </ion-button>
-        <ion-button (click)="cambiarVista(3)" [fill]="btn3.fill" [color]="btn3.color" expand="block">{{pregunta.answ3}}
-        </ion-button>
-        <ion-button (click)="cambiarVista(4)" [fill]="btn4.fill" [color]="btn4.color" expand="block">{{pregunta.answ4}}
-        </ion-button>
-      </div>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let opc of pregunta.opciones">
+              <ion-label>{{opc}}</ion-label>
+              <ion-checkbox (ionChange)="GuardarRespuestas(i,pregunta.pregunta,opc)" slot="end"
+                disabled="{{invisible}}"></ion-checkbox>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
     </ion-slide>
-
   </ion-slides>
+
+
+  <div id="btnenviar">
+    <ion-button *ngIf="boton" (click)="almacenar()" >Finalizar</ion-button>
+  </div>
+
 
 </ion-content>

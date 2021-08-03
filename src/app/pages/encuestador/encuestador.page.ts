@@ -12,10 +12,16 @@ export class EncuestadorPage implements OnInit {
 
   public nombreEncuestador: string = ""
   public nombreSupervisor: string = ""
+  public cedulaEncuestador: string = "1718123563"
+  public cedulaSupervisor: string = "1718123321"
   public numEncuestasRealizadas: number;
   public numEncuestasfaltantes: number;
   public fecha = new Date();
   public hoy: string;
+  cedulas = {
+    encCed: this.cedulaEncuestador,
+    encSup: this.cedulaSupervisor,
+  };
 
   constructor(
     private navCtrl: NavController,
@@ -29,10 +35,12 @@ export class EncuestadorPage implements OnInit {
     this.numEncuestasRealizadas = 10;
     this.numEncuestasfaltantes = 80;
     this.hoy = this.fecha.toLocaleDateString();
+
   }
 
   agregar() {
-    this.navCtrl.navigateForward('/home/encuestador/encuestas')
+
+    this.navCtrl.navigateForward(`/home/encuestador/encuestas/${JSON.stringify(this.cedulas)}`)
 
   }
 

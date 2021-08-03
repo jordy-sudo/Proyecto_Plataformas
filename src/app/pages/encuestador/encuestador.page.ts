@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
-
+import * as moment from 'moment';
 
 
 @Component({
@@ -16,7 +16,6 @@ export class EncuestadorPage implements OnInit {
   public cedulaSupervisor: string = "1718123321"
   public numEncuestasRealizadas: number;
   public numEncuestasfaltantes: number;
-  public fecha = new Date();
   public hoy: string;
   cedulas = {
     encCed: this.cedulaEncuestador,
@@ -34,12 +33,14 @@ export class EncuestadorPage implements OnInit {
     this.nombreEncuestador = "Daniela encuestadora"
     this.numEncuestasRealizadas = 10;
     this.numEncuestasfaltantes = 80;
-    this.hoy = this.fecha.toLocaleDateString();
+    this.hoy = moment().locale("es").format("LL");
+
+    console.log(this.hoy);
+
 
   }
 
   agregar() {
-
     this.navCtrl.navigateForward(`/home/encuestador/encuestas/${JSON.stringify(this.cedulas)}`)
 
   }

@@ -4,6 +4,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { DataService } from '../../services/data.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
+
 
 
 @Component({
@@ -21,6 +23,8 @@ export class EncuestasPage implements OnInit {
   invisible: boolean = false
   respuestas = []
   boton: boolean = false;
+  timeA: any;
+  timeB: any;
 
 
   slideOpts = {
@@ -37,17 +41,13 @@ export class EncuestasPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    let userInformation: any = this.route.snapshot.paramMap.get('cedula');
-    console.log(userInformation)
+    this.timeA = moment();
     this.geolocation.getCurrentPosition().then((resp) => {
       this.lngCel = Number(resp.coords.longitude);
       this.latCel = Number(resp.coords.latitude);
-      var d = new Date();
-      
-      let cedulas: any = JSON.parse(this.route.snapshot.paramMap.get('cedulas'));
-      
-      this.respuestas.push(cedulas)
-      this.respuestas.push(d.toLocaleString())
+
+      this.respuestas.push(JSON.parse(this.route.snapshot.paramMap.get('cedulas')))
+      this.respuestas.push(moment().format('L'))
       this.respuestas.push({ lat: this.latCel, lng: this.lngCel })
 
     })
@@ -74,12 +74,17 @@ export class EncuestasPage implements OnInit {
       if (i == 10) {
         this.boton = true
         this.invisible = true;
+        this.timeB = moment();
       }
     }
 
   }
 
   almacenar() {
+
+
+    var duration = this.timeB.diff(this.timeA, 'seconds')
+    this.respuestas.push({duracion: duration})
     console.log(this.respuestas)
     this.navCtrl.navigateForward('home/encuestador')
   }
